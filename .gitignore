@@ -6,8 +6,6 @@ __pycache__/
 .DS_Store
 *.log
 .env
-outputs/*.png
-outputs/*.html
 models/*.joblib
 !deployment/best_model.joblib
 !deployment/vectorizer.joblib
