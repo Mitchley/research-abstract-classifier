@@ -6,6 +6,10 @@ import random
 from pathlib import Path
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+import nltk
+nltk.download('stopwords', quiet=True)
+nltk.download('wordnet', quiet=True)
+nltk.download('omw-1.4', quiet=True)
 
 st.set_page_config(page_title="Research Abstract Classifier", layout="wide")
 st.title("Research Abstract Classifier")
