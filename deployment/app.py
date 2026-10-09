@@ -12,12 +12,8 @@ st.markdown("Paste a research abstract to classify it as **AI** or **Classical**
 
 # --- Load model + vectorizer ---
 try:
-from pathlib import Path
-
-BASE_DIR = Path(__file__).resolve().parent
-
-model = joblib.load(BASE_DIR / "best_model.joblib")
-vectorizer = joblib.load(BASE_DIR / "vectorizer.joblib")
+    model = joblib.load(BASE_DIR / "best_model.joblib")
+    vectorizer = joblib.load(BASE_DIR / "vectorizer.joblib")
 except FileNotFoundError:
     st.error("Model files not found. Train in Q2 first.")
     st.stop()
