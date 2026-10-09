@@ -276,4 +276,4 @@ if st.button("Predict"):
             if pred == st.session_state.true_label:
                 st.markdown("**Correct** - model agrees with the dataset label.")
             else:
-                st.markdown(f"**Incorrect** - dataset says `{st.session_state.true_label}`, model said `{pred}`.")
+                                st.markdown(f"**Incorrect** - dataset says `{st.session_state.true_label}`, model said `{pred}`.")
