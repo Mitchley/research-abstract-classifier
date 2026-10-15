@@ -20,18 +20,19 @@ Source: MATANGA NY (2026).
 ## Notebooks
 
 **Q1 Baseline Model** (`Q1_baseline_model.ipynb`)
-Preprocessing, TF-IDF features, Logistic Regression with balanced class weights. Test accuracy 88.60%, macro F1 0.8285.
+Preprocessing, TF-IDF features, Logistic Regression with balanced class weights.
 
 **Q2 Improved Models and Deployment** (`Q2_models.ipynb`)
-Linear SVM, Random Forest, XGBoost, and Naive Bayes compared. GridSearchCV enhancement applied to the winning model (Linear SVM). Tuned model saved for deployment. Macro F1 0.8771.
+Linear SVM, Random Forest, XGBoost, and Naive Bayes compared. GridSearchCV enhancement applied to the winning model. Tuned model saved for deployment.
 
 **Q3 Corpus Summarization** (`Q3_summarization.ipynb`)
 Five research articles denoised with spaCy. TextRank extractive summary for the first article; LSA extractive summary for the remaining four, with word cloud visualizations.
 
 **Q4 Topic Modeling** (`Q4_topic_modeling.ipynb`)
-LDA with three topics on the corpus. Top words per topic, document-topic heatmap, and an interactive pyLDAvis Intertopic Distance Map.
+LDA with three topics on the corpus. Top words per topic, document-topic heatmap, and an interactive pyLDAvis Map.
 
 **Interactive map:** https://mitchley.github.io/research-abstract-classifier/outputs/q4_pyldavis.html
+
 ---
 
 ## Deployment
