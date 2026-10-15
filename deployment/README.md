@@ -6,7 +6,7 @@ cd deployment
 pip install -r requirements.txt
 streamlit run app.py
 ```
-Opens at http://localhost:8501
+Link to the app: https://p5wiapqtaoavdmv9q4gacu.streamlit.app/
 
 ## Files
 - `app.py` — Streamlit web interface
