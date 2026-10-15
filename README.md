@@ -10,10 +10,10 @@ Source: MATANGA NY (2026).
 
 ## Structure
 
-- `data/` — original dataset, cleaned dataset, and five-article corpus
-- `notebooks/` — Q1 through Q4 notebooks
-- `deployment/` — Streamlit app and serialized model
-- `outputs/` — plots and the interactive pyLDAvis map
+- `data/` - original dataset, cleaned dataset, and five-article corpus
+- `notebooks/` - Q1 through Q4 notebooks
+- `deployment/` - Streamlit app and serialized model
+- `outputs/` - plots and the interactive pyLDAvis map
 
 ---
 
@@ -31,6 +31,7 @@ Five research articles denoised with spaCy. TextRank extractive summary for the 
 **Q4 Topic Modeling** (`Q4_topic_modeling.ipynb`)
 LDA with three topics on the corpus. Top words per topic, document-topic heatmap, and an interactive pyLDAvis Intertopic Distance Map.
 
+**Interactive map:** https://mitchley.github.io/research-abstract-classifier/outputs/q4_pyldavis.html
 ---
 
 ## Deployment
