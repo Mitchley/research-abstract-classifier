@@ -11,12 +11,15 @@ nltk.download('stopwords', quiet=True)
 nltk.download('wordnet', quiet=True)
 nltk.download('omw-1.4', quiet=True)
 
+# page setup
 st.set_page_config(page_title="Research Abstract Classifier", layout="wide")
 st.title("Research Abstract Classifier")
 st.markdown("Paste a research abstract to classify it as **AI** or **Classical**.")
 
+# resolve paths relative to this file (works locally and on Streamlit Cloud)
 BASE_DIR = Path(__file__).resolve().parent
 
+# load model + vectorizer (produced in Q2)
 try:
     model = joblib.load(BASE_DIR / "best_model.joblib")
     vectorizer = joblib.load(BASE_DIR / "vectorizer.joblib")
@@ -24,6 +27,7 @@ except FileNotFoundError:
     st.error("Model files not found. Train in Q2 first.")
     st.stop()
 
+# cached dataset loader for sample previews
 @st.cache_data
 def load_samples():
     with open(BASE_DIR / "../data/research_abstracts_clean.json", encoding="utf-8") as f:
@@ -31,6 +35,7 @@ def load_samples():
 
 samples = load_samples()
 
+# stopwords + lemmatizer from Q1
 STOP = set(stopwords.words('english')) | {
     'paper','study','result','research','using','used','based',
     'propose','proposed','method','model','show','however','thus','also'
@@ -38,6 +43,7 @@ STOP = set(stopwords.words('english')) | {
 LEM = WordNetLemmatizer()
 
 def clean(text):
+    """Denoising pipeline same as Q1."""
     text = re.sub(r'\[Formula:\s*see\s*text\]', ' ', str(text), flags=re.I)
     text = re.sub(r'\\u[0-9a-fA-F]{4}', ' ', text)
     text = re.sub(r'<[^>]+>|http\S+|10\.\d{4,9}/\S+', ' ', text)
@@ -46,11 +52,13 @@ def clean(text):
     return ' '.join(LEM.lemmatize(w) for w in text.split()
                     if w not in STOP and len(w) > 2)
 
+# session state so the sidebar buttons can fill the text area
 if "text_input" not in st.session_state:
     st.session_state.text_input = ""
 if "true_label" not in st.session_state:
     st.session_state.true_label = None
 
+# sidebar: sample loader and clear buttons
 with st.sidebar:
     st.header("Options")
     if st.button("Load random sample from dataset"):
@@ -62,12 +70,15 @@ with st.sidebar:
         st.session_state.text_input = ""
         st.session_state.true_label = None
 
+# main input
 text = st.text_area("Abstract:", value=st.session_state.text_input, height=250)
 st.session_state.text_input = text
 
+# show ground truth if sample was loaded
 if st.session_state.true_label:
     st.caption(f"Ground-truth label of the loaded sample: **{st.session_state.true_label.upper()}**")
 
+# prediction
 if st.button("Predict"):
     if not text.strip():
         st.warning("Please enter some text.")
@@ -83,6 +94,7 @@ if st.button("Predict"):
         st.success(f"**Prediction:** {pred.upper()}")
         st.write(f"Confidence - AI: {p_ai:.3f} | Classical: {p_cl:.3f}")
 
+        # if the input came from a labeled sample, compare with ground truth
         if st.session_state.true_label:
             if pred == st.session_state.true_label:
                 st.markdown("**Correct** - model agrees with the dataset label.")
